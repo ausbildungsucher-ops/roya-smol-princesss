@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 <title>for you cutest princesss ever </title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,16 @@
     --white:#fffdfa;
     --shadow:#ffd2e3;
   }
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+  }
+  html{
+    scroll-behavior:smooth;
+    overflow-x:clip;
+  }
   body{
     font-family:'Nunito',sans-serif;
     color:var(--ink);
@@ -55,13 +63,13 @@
 
   /* ---------- type ---------- */
   .eyebrow{
-    font-family:'Caveat',cursive; font-size:1.5rem; color:var(--rose-deep);
+    font-family:'Caveat',cursive; font-size:clamp(1.3rem, 4vw, 1.5rem); color:var(--rose-deep);
     display:inline-block; transform:rotate(-2deg);
   }
   h1,h2,h3{ font-family:'Fraunces',serif; font-weight:700; line-height:1.12; }
-  h2{ font-size:clamp(1.9rem,4.4vw,2.9rem); margin:.2rem 0 .4rem; }
+  h2{ font-size:clamp(1.75rem, 4.4vw, 2.9rem); margin:.2rem 0 .4rem; }
   .hl{ background-image:linear-gradient(transparent 58%, #ffc2d8 58%); padding:0 .1em; }
-  .squiggle{ display:block; margin:.2rem auto 0; }
+  .squiggle{ display:block; margin:.2rem auto 0; max-width:90%; }
   .sec-head{ text-align:center; margin-bottom:2.6rem; }
 
   /* ---------- layout ---------- */
@@ -89,6 +97,7 @@
     border-radius:999px; padding:.85rem 1.9rem; cursor:pointer;
     box-shadow:0 5px 0 var(--rose-deep);
     transition:transform .15s, box-shadow .15s, background .2s;
+    touch-action:manipulation;
   }
   .btn:hover{ background:var(--rose-deep); }
   .btn:active{ transform:translateY(4px); box-shadow:0 1px 0 var(--rose-deep); }
@@ -109,20 +118,21 @@
 
   /* ---------- ribbon header ---------- */
   .ribbon{
-    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    display:flex; justify-content:space-between; align-items:center; gap:.5rem 1rem;
     background:var(--white); border-bottom:3px dashed var(--pink);
     padding:.6rem 1.2rem; font-family:'Caveat',cursive; font-size:1.25rem;
     color:var(--ink-soft);
   }
-  .ribbon-heart{ color:var(--rose); animation:beat 1.6s ease-in-out infinite; }
+  .ribbon-heart{ color:var(--rose); animation:beat 1.6s ease-in-out infinite; flex-shrink:0; }
   @keyframes beat{ 0%,100%{ transform:scale(1);} 12%{ transform:scale(1.35);} 24%{ transform:scale(1);} }
 
   /* ---------- hero ---------- */
   .hero{ padding:4.5rem 1.25rem 5.5rem; text-align:center; position:relative; }
-  .hero-copy{ max-width:640px; margin:0 auto 3rem; }
-  .hero h1{ font-size:clamp(2.4rem,6.5vw,4.3rem); margin:.3rem 0 1rem; }
+  .hero-copy{ max-width:640px; margin:0 auto 3rem; position:relative; z-index:2; }
+  .hero h1{ font-size:clamp(2.15rem, 6.5vw, 4.3rem); margin:.3rem 0 1rem; }
   .hero h1 em{ font-style:italic; color:var(--rose-deep); }
-  .hero p{ font-size:1.08rem; color:var(--ink-soft); max-width:52ch; margin-inline:auto; }
+  .hero p{ font-size:clamp(.98rem, 2.8vw, 1.08rem); color:var(--ink-soft); max-width:52ch; margin-inline:auto; }
+  .sticker-row{ display:contents; }
   .sticker{
     position:absolute; font-family:'Caveat',cursive; font-weight:700; font-size:1.15rem;
     background:var(--white); border:2px solid var(--rose); color:var(--rose-deep);
@@ -137,23 +147,30 @@
 
   /* envelope */
   .envelope{
-    position:relative; width:min(440px,88vw); aspect-ratio:3/2; margin:0 auto;
-    cursor:pointer; perspective:1100px; transition:transform .3s;
+    position:relative; width:min(440px, 90vw); aspect-ratio:3/2; margin:0 auto;
+    cursor:pointer; perspective:1100px; transition:transform .3s, margin-top .5s ease;
+    touch-action:manipulation;
   }
-  .envelope:hover{ transform:rotate(-1deg) scale(1.015); }
+  @media (hover:hover){
+    .envelope:hover{ transform:rotate(-1deg) scale(1.015); }
+  }
   .env-back{ position:absolute; inset:0; background:#ffd0e1; border-radius:14px; border:2px solid #f3a4c3; box-shadow:0 22px 45px -20px rgba(217,79,134,.55); }
   .env-letter{
-    position:absolute; left:6%; right:6%; top:5%; bottom:5%;
+    position:absolute; left:5%; right:5%; top:5%; bottom:5%;
     background:#fffdf8; border:2px dashed #f2b7cd; border-radius:10px;
-    z-index:2; padding:1.2rem 1rem; display:flex; flex-direction:column;
+    z-index:2; padding:clamp(.6rem, 2.5vw, 1.2rem) clamp(.65rem, 2.5vw, 1rem);
+    display:flex; flex-direction:column;
     justify-content:center; gap:.15rem;
-    font-family:'Caveat',cursive; font-size:1.15rem; color:var(--ink);
+    font-family:'Caveat',cursive; font-size:clamp(.95rem, 3.6vw, 1.15rem);
+    line-height:1.3; color:var(--ink);
+    overflow-y:auto;
     transition:transform 1s cubic-bezier(.22,1,.36,1) .4s, z-index 0s .4s;
   }
   .env-front{
     position:absolute; inset:0; z-index:3; border-radius:14px;
     background:linear-gradient(180deg,#ffc4da,#ffb2ce);
     clip-path:polygon(0 100%,100% 100%,100% 24%,50% 62%,0 24%);
+    pointer-events:none;
   }
   .env-flap{
     position:absolute; top:0; left:0; right:0; height:58%; z-index:4;
@@ -161,6 +178,7 @@
     clip-path:polygon(0 0,100% 0,50% 100%);
     transform-origin:top center;
     transition:transform .75s cubic-bezier(.55,.06,.35,1), z-index 0s .38s;
+    pointer-events:none;
   }
   .seal{
     position:absolute; top:52%; left:50%; transform:translate(-50%,-50%);
@@ -173,7 +191,7 @@
   }
   .envelope.open .env-flap{ transform:rotateX(180deg); z-index:1; }
   .envelope.open .seal{ opacity:0; transform:translate(-50%,-50%) scale(.3); pointer-events:none; }
-  .envelope.open .env-letter{ transform:translateY(-58%) rotate(-1.5deg); z-index:4; }
+  .envelope.open .env-letter{ transform:translateY(-55%) rotate(-1.5deg); z-index:4; box-shadow:0 12px 28px -10px rgba(217,79,134,.45); }
   .env-hint{
     margin-top:1.3rem; font-family:'Caveat',cursive; font-size:1.4rem;
     color:var(--rose-deep);
@@ -205,7 +223,9 @@
   }
   .note.reveal{ opacity:0; transform:translateY(28px) rotate(var(--rot,0deg)); }
   .note.reveal.in{ opacity:1; transform:translateY(0) rotate(var(--rot,0deg)); }
-  .note:hover{ transform:rotate(0deg) translateY(-6px) !important; }
+  @media (hover:hover){
+    .note:hover{ transform:rotate(0deg) translateY(-6px) !important; }
+  }
   .note:nth-child(4n+1){ --rot:-2.5deg; --nb:#ffe0ec; transition-delay:.0s; }
   .note:nth-child(4n+2){ --rot:1.8deg;  --nb:var(--peach); transition-delay:.12s; }
   .note:nth-child(4n+3){ --rot:-1.4deg; --nb:var(--lilac); transition-delay:.24s; }
@@ -220,8 +240,11 @@
     border-radius:999px; padding:.55rem 1.2rem; cursor:pointer;
     transition:transform .15s, background .2s, box-shadow .15s;
     box-shadow:0 3px 0 var(--pink);
+    touch-action:manipulation;
   }
-  .chip:hover{ transform:translateY(-2px); }
+  @media (hover:hover){
+    .chip:hover{ transform:translateY(-2px); }
+  }
   .chip.active{ background:var(--rose); color:#fff; border-color:var(--rose-deep); box-shadow:0 3px 0 var(--rose-deep); }
   .mood-reply{
     font-family:'Caveat',cursive; font-size:1.55rem; color:var(--ink);
@@ -232,7 +255,7 @@
   /* ---------- compliment jar ---------- */
   .jar-zone{ display:flex; gap:2.5rem; align-items:center; justify-content:center; flex-wrap:wrap; }
   .jar{
-    position:relative; width:160px; height:185px; flex:none;
+    position:relative; width:160px; height:185px; flex:none; margin-top:16px;
     border:3px solid var(--ink-soft); border-radius:24px 24px 46px 46px;
     background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,225,237,.75));
     box-shadow:inset 0 -14px 24px rgba(239,109,156,.2), 8px 8px 0 var(--shadow);
@@ -244,13 +267,14 @@
   }
   .jar span{ position:absolute; font-size:1.3rem; color:var(--rose-deep); }
   .c-note{
-    max-width:430px; min-height:150px; background:#fffdf8; border:2px dashed var(--pink-deep);
+    width:100%; max-width:430px; min-height:150px; background:#fffdf8; border:2px dashed var(--pink-deep);
     border-radius:14px; padding:1.6rem 1.8rem; display:flex; flex-direction:column;
     justify-content:center; gap:.8rem;
   }
   .c-note .text{ font-family:'Caveat',cursive; font-size:1.8rem; line-height:1.3; }
   .c-note .text.pop{ animation:pop .55s cubic-bezier(.2,1.5,.4,1); }
   @keyframes pop{ 0%{ transform:scale(.5) rotate(-4deg); opacity:0; } 100%{ transform:scale(1) rotate(0); opacity:1; } }
+  .c-actions{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
   .jar-count{ font-size:.85rem; font-weight:700; color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase; }
 
   /* ---------- memories ---------- */
@@ -262,14 +286,16 @@
   }
   .polaroid.reveal{ opacity:0; transform:translateY(30px) rotate(var(--rot,0deg)); }
   .polaroid.reveal.in{ opacity:1; transform:rotate(var(--rot,0deg)); }
-  .polaroid:hover{ transform:rotate(0deg) translateY(-8px) scale(1.03) !important; z-index:5; }
+  @media (hover:hover){
+    .polaroid:hover{ transform:rotate(0deg) translateY(-8px) scale(1.03) !important; z-index:5; }
+  }
   .polaroid:nth-child(5n+1){ --rot:-4deg; } .polaroid:nth-child(5n+2){ --rot:3deg; }
   .polaroid:nth-child(5n+3){ --rot:-2deg; } .polaroid:nth-child(5n+4){ --rot:4deg; }
   .polaroid:nth-child(5n+5){ --rot:-3deg; }
-  .ph{ overflow:hidden; aspect-ratio:4/5; }
+  .ph{ overflow:hidden; aspect-ratio:4/5; background:#ffeef4; }
   .ph img{ width:100%; height:100%; object-fit:cover; display:block; animation:kenburns 13s ease-in-out infinite alternate; }
   @keyframes kenburns{ from{ transform:scale(1) translate(0,0); } to{ transform:scale(1.14) translate(2%, -2%); } }
-  .caption{ font-family:'Caveat',cursive; font-size:1.35rem; text-align:center; padding-top:.7rem; color:var(--ink); }
+  .caption{ font-family:'Caveat',cursive; font-size:1.35rem; text-align:center; padding-top:.7rem; color:var(--ink); line-height:1.2; }
 
   /* ---------- hug ---------- */
   .hug-sec{ text-align:center; background:linear-gradient(180deg,var(--blush),#ffd3e3); }
@@ -278,9 +304,10 @@
     background:radial-gradient(circle at 35% 30%, #ffd2e1, var(--rose) 75%);
     font-size:3.2rem; cursor:pointer; box-shadow:0 10px 0 var(--rose-deep);
     transition:transform .12s, box-shadow .12s; position:relative;
+    touch-action:manipulation;
   }
   .hug-btn:active{ transform:translateY(8px) scale(.96); box-shadow:0 2px 0 var(--rose-deep); }
-  .hug-msg{ font-family:'Caveat',cursive; font-size:1.9rem; color:var(--rose-deep); margin-top:1.6rem; min-height:2.6rem; }
+  .hug-msg{ font-family:'Caveat',cursive; font-size:1.9rem; color:var(--rose-deep); margin-top:1.6rem; min-height:2.6rem; padding-inline:.5rem; }
   .hug-count{ font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:.85rem; color:var(--ink-soft); margin-top:.4rem; }
 
   /* ---------- final letter ---------- */
@@ -290,7 +317,7 @@
     font-family:'Caveat',cursive; font-size:1.7rem; line-height:1.55;
   }
   .letter-card p{ margin-bottom:1.1rem; }
-  .letter-card .sig{ text-align:right; font-size:1.9rem; color:var(--rose-deep); }
+  .letter-card .sig{ text-align:right; font-size:1.9rem; color:var(--rose-deep); margin-bottom:0; }
 
   /* ---------- footer ---------- */
   footer{
@@ -309,10 +336,158 @@
   }
   @keyframes floatup{ to{ transform:translateY(-70px) scale(1.4); opacity:0; } }
 
+  /* ---------- tablet & mobile breakpoints ---------- */
   @media (max-width:860px){
     .st-3,.st-4{ display:none; }
-    .ribbon{ font-size:1.05rem; }
+    .ribbon{ font-size:1.1rem; }
   }
+
+  @media (max-width:640px){
+    .sec{ padding:3.4rem 1rem; }
+    .sec-head{ margin-bottom:2rem; }
+
+    /* Ribbon stacks cleanly instead of squishing */
+    .ribbon{
+      flex-wrap:wrap;
+      justify-content:center;
+      text-align:center;
+      padding:.55rem .85rem;
+      font-size:1.05rem;
+      gap:.25rem .6rem;
+    }
+
+    /* Keep stickers above hero copy instead of overlapping text */
+    .hero{ padding:2.2rem 1rem 4rem; }
+    .sticker-row{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:.55rem;
+      margin-bottom:1.4rem;
+    }
+    .sticker{
+      position: static;
+      font-size:.95rem;
+      padding:.25rem .75rem;
+      box-shadow:3px 3px 0 var(--pink);
+    }
+    .hero-copy{ margin-bottom:2.2rem; }
+
+    /* Give opened letter room to slide up without covering hero paragraph */
+    .hero.opened .envelope{
+      margin-top:4.8rem;
+    }
+    .seal{
+      width:48px;
+      height:48px;
+      font-size:1.25rem;
+    }
+
+    /* Sticky notes */
+    .notes-grid{
+      grid-template-columns:1fr;
+      gap:1.35rem;
+      padding-inline:.25rem;
+    }
+    .note{
+      min-height:135px;
+      padding:1.8rem 1.25rem 1.4rem;
+      font-size:1.4rem;
+    }
+    .note:nth-child(n){
+      --rot:-1deg;
+    }
+    .note:nth-child(even){
+      --rot:1deg;
+    }
+
+    /* Mood check-in */
+    .card{ padding:1.6rem 1.15rem; }
+    .chips{ gap:.55rem; }
+    .chip{
+      padding:.5rem .95rem;
+      font-size:.92rem;
+    }
+    .mood-reply{
+      font-size:1.4rem;
+      min-height:4.8rem;
+    }
+
+    /* Compliment jar */
+    .jar-zone{ gap:1.6rem; }
+    .jar{
+      width:130px;
+      height:150px;
+    }
+    .c-note{
+      padding:1.35rem 1.2rem;
+      text-align:center;
+    }
+    .c-note .text{ font-size:1.55rem; }
+    .c-actions{
+      justify-content:center;
+      flex-direction:column;
+      gap:.65rem;
+    }
+    .c-actions .btn{ width:100%; }
+
+    /* Polaroids: 2-column scrapbook layout on phones */
+    .polaroids{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:1.2rem .85rem;
+      align-items:start;
+    }
+    .polaroid{
+      width:100%;
+      padding:8px 8px 12px;
+    }
+    .polaroid:last-child:nth-child(odd){
+      grid-column:1 / -1;
+      max-width:58%;
+      margin-inline:auto;
+    }
+    .polaroid .tape{
+      width:64px;
+      height:20px;
+      top:-10px;
+    }
+    .caption{
+      font-size:1.15rem;
+      padding-top:.5rem;
+    }
+
+    /* Hug button */
+    .hug-btn{
+      width:145px;
+      height:145px;
+      font-size:2.7rem;
+    }
+    .hug-msg{ font-size:1.65rem; }
+
+    /* Final letter */
+    .letter-card{
+      padding:2.2rem 1.25rem 1.8rem;
+      font-size:1.45rem;
+      line-height:1.48;
+    }
+    .letter-card .sig{ font-size:1.6rem; }
+  }
+
+  @media (max-width:360px){
+    .polaroids{
+      grid-template-columns:1fr;
+      max-width:240px;
+      margin-inline:auto;
+    }
+    .polaroid:last-child:nth-child(odd){
+      max-width:100%;
+    }
+    .env-letter{
+      font-size:.88rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *,*::before,*::after{
@@ -339,15 +514,17 @@
 
 <!-- ══════════ OPENING: THE LETTER ══════════ -->
 <section class="hero" id="top">
-  <span class="sticker st-1" aria-hidden="true">100% certified prettiest princess ever ♡</span>
-  <span class="sticker st-2" aria-hidden="true"> certified hottest and cutest idiot ever</span>
-  <span class="sticker st-3" aria-hidden="true">you are so loved and cared for</span>
-  <span class="sticker st-4" aria-hidden="true">certified small princess </span>
+  <div class="sticker-row" aria-hidden="true">
+    <span class="sticker st-1">100% certified prettiest princess ever ♡</span>
+    <span class="sticker st-2"> certified most charming and cutest idiot ever</span>
+    <span class="sticker st-3">you are so loved and cared for</span>
+    <span class="sticker st-4">certified small princess </span>
+  </div>
 
   <div class="hero-copy">
     <span class="eyebrow">for the sweetest prettiest idiot ever ♡</span>
     <h1>all happiness and joy,<br><em>belongs to you</em></h1>
-    <p>noone and nothing. can bring you dowon “you are stronger than all ,.”
+    <p>noone and nothing. can take your freedom “you are stronger than all ,.”
        ur   stronger, you will overcome all hard times.</p>
   </div>
 
@@ -394,9 +571,9 @@
       <div class="note reveal"><span class="tape t-mint" aria-hidden="true"></span>u idiot.” u most amazing girl ever.</div>
       <div class="note reveal"><span class="tape" aria-hidden="true"></span>the way you keep going? that’s so impressive. that’s huge strength.</div>
       <div class="note reveal"><span class="tape t-lilac" aria-hidden="true"></span>your feelings matters,. all of them.</div>
-      <div class="note reveal"><span class="tape" aria-hidden="true"></span>لازم نیست برای شاد بودن یا آرامش داشتن، چیزی رو ثابت کنی؛ تو سزاوارشی، همین‌طور که هستی.</div>
-      <div class="note reveal"><span class="tape t-mint" aria-hidden="true"></span>hard times end. you won’t feel like this forever. promise.</div>
-      <div class="note reveal"><span class="tape t-lilac" aria-hidden="true"></span>همه جا خیلی خوشحالند که تو وجود داری. من خیلی خوشحالم که با تو آشنا شدم.</div>
+      <div class="note reveal" dir="auto"><span class="tape" aria-hidden="true"></span>لازم نیست برای شاد بودن یا آرامش داشتن، چیزی رو ثابت کنی؛ تو سزاوارشی، همین‌طور که هستی.</div>
+      <div class="note reveal"><span class="tape t-mint" aria-hidden="true"></span>hard times end. you won’t feel like this forever.  I promise.</div>
+      <div class="note reveal" dir="auto"><span class="tape t-lilac" aria-hidden="true"></span>همه جا خیلی خوشحالند که تو وجود داری. من خیلی خوشحالم که با تو آشنا شدم.</div>
     </div>
   </div>
 </section>
@@ -439,7 +616,7 @@
       </div>
       <div class="c-note">
         <p class="text" id="cText">the jar is full  things about you, take one ♡</p>
-        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+        <div class="c-actions">
           <button class="btn" id="cBtn" type="button">pull one out ♡</button>
           <span class="jar-count" id="cCount">pulled: 0</span>
         </div>
@@ -533,7 +710,8 @@
     const layer = $('#petals');
     const glyphs = ['❀','✿','♡','♥','✿','❀'];
     const colors = ['#ff9ec4','#f78fb3','#ffc2d8','#ef6d9c','#ffd6e5'];
-    for(let i=0;i<16;i++){
+    const count = window.innerWidth < 640 ? 10 : 16;
+    for(let i=0;i<count;i++){
       const p = document.createElement('span');
       p.className = 'petal';
       p.textContent = glyphs[i % glyphs.length];
@@ -541,7 +719,7 @@
       p.style.setProperty('--s', (12 + Math.random()*12) + 'px');
       p.style.setProperty('--dur', (10 + Math.random()*9) + 's');
       p.style.setProperty('--delay', (-Math.random()*14) + 's');
-      p.style.setProperty('--sway', (Math.random()*160 - 80) + 'px');
+      p.style.setProperty('--sway', (Math.random()*120 - 60) + 'px');
       p.style.setProperty('--spin', (240 + Math.random()*260) + 'deg');
       p.style.color = colors[i % colors.length];
       layer.appendChild(p);
@@ -559,7 +737,7 @@
       s.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
       s.style.cssText = 'position:fixed;z-index:80;pointer-events:none;font-size:'+(14+Math.random()*14)+'px;color:'+colors[i%4]+';left:'+x+'px;top:'+y+'px;';
       document.body.appendChild(s);
-      const a = Math.random()*Math.PI*2, d = 60 + Math.random()*90;
+      const a = Math.random()*Math.PI*2, d = 50 + Math.random()*75;
       s.animate([
         { transform:'translate(-50%,-50%) scale(.4)', opacity:1 },
         { transform:'translate(calc(-50% + '+(Math.cos(a)*d)+'px), calc(-50% + '+(Math.sin(a)*d - 30)+'px)) scale(1.1) rotate('+(Math.random()*90-45)+'deg)', opacity:0 }
@@ -599,7 +777,7 @@
   /* ---------- scroll reveal ---------- */
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { threshold:.15 });
+  }, { threshold:.12 });
   $$('.reveal').forEach(el => io.observe(el));
 
   /* ---------- mood check-in ---------- */
@@ -638,7 +816,7 @@
   ];
   let cIdx = -1, cPulls = 0;
   const cText = $('#cText'), cCount = $('#cCount');
-  $('#cBtn').addEventListener('click', function(e){
+  $('#cBtn').addEventListener('click', function(){
     let next;
     do { next = Math.floor(Math.random()*compliments.length); } while(next === cIdx && compliments.length > 1);
     cIdx = next; cPulls++;
